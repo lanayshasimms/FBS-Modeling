@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="12.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="12.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="CFB Box Scores 2002-2024" width="90" x="45" y="34">
+        <parameter key="repository_entry" value="cfb_box-scores_2002-2024"/>
+      </operator>
+      <operator activated="true" class="numerical_to_polynominal" compatibility="12.0.001" expanded="true" height="82" name="Make Season Qualitative" width="90" x="179" y="85">
+        <parameter key="attribute_filter_type" value="subset"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="season"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="numeric"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="real"/>
+        <parameter key="block_type" value="value_series"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_series_end"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="replace_missing_values" compatibility="12.0.001" expanded="true" height="103" name="Replace Unranked Teams" width="90" x="313" y="85">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="attribute_filter_type" value="subset"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="rank_away|rank_home"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default" value="value"/>
+        <list key="columns"/>
+        <parameter key="replenishment_value" value="26"/>
+      </operator>
+      <operator activated="true" class="replace_missing_values" compatibility="12.0.001" expanded="true" height="103" name="Replace Postseason Week" width="90" x="447" y="85">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="week"/>
+        <parameter key="attributes" value="week"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default" value="value"/>
+        <list key="columns"/>
+        <parameter key="replenishment_value" value="17"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="12.0.001" expanded="true" height="103" name="Remove 2002-2013" width="90" x="581" y="85">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="season.does_not_equal.2002"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2003"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2004"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2005"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2006"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2007"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2008"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2009"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2010"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2011"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2012"/>
+          <parameter key="filters_entry_key" value="season.does_not_equal.2013"/>
+        </list>
+        <parameter key="filters_logic_and" value="true"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="filter_examples" compatibility="12.0.001" expanded="true" height="103" name="Big10/SEC Teams" width="90" x="715" y="85">
+        <parameter key="parameter_expression" value=""/>
+        <parameter key="condition_class" value="custom_filters"/>
+        <parameter key="invert_filter" value="false"/>
+        <list key="filters_list">
+          <parameter key="filters_entry_key" value="home.matches.Washington"/>
+          <parameter key="filters_entry_key" value="home.matches.Michigan"/>
+          <parameter key="filters_entry_key" value="home.matches.Michigan State"/>
+          <parameter key="filters_entry_key" value="home.matches.Wisconsin"/>
+          <parameter key="filters_entry_key" value="home.matches.USC"/>
+          <parameter key="filters_entry_key" value="home.matches.UCLA"/>
+          <parameter key="filters_entry_key" value="home.matches.Rutgers"/>
+          <parameter key="filters_entry_key" value="home.matches.Purdue"/>
+          <parameter key="filters_entry_key" value="home.matches.Penn State"/>
+          <parameter key="filters_entry_key" value="home.matches.Oregon"/>
+          <parameter key="filters_entry_key" value="home.matches.Ohio State"/>
+          <parameter key="filters_entry_key" value="home.matches.Northwestern"/>
+          <parameter key="filters_entry_key" value="home.matches.Nebraska"/>
+          <parameter key="filters_entry_key" value="home.matches.Minnesota"/>
+          <parameter key="filters_entry_key" value="home.matches.Maryland"/>
+          <parameter key="filters_entry_key" value="home.matches.Iowa"/>
+          <parameter key="filters_entry_key" value="home.matches.Indiana"/>
+          <parameter key="filters_entry_key" value="home.matches.Illinois"/>
+          <parameter key="filters_entry_key" value="home.matches.Alabama"/>
+          <parameter key="filters_entry_key" value="home.matches.Arkansas"/>
+          <parameter key="filters_entry_key" value="home.matches.Auburn"/>
+          <parameter key="filters_entry_key" value="home.matches.Florida"/>
+          <parameter key="filters_entry_key" value="home.matches.Georgia"/>
+          <parameter key="filters_entry_key" value="home.matches.Kentucky"/>
+          <parameter key="filters_entry_key" value="home.matches.LSU"/>
+          <parameter key="filters_entry_key" value="home.matches.Mississippi State"/>
+          <parameter key="filters_entry_key" value="home.matches.Missouri"/>
+          <parameter key="filters_entry_key" value="home.matches.Oklahoma"/>
+          <parameter key="filters_entry_key" value="home.matches.Ole Miss"/>
+          <parameter key="filters_entry_key" value="home.matches.South Carolina"/>
+          <parameter key="filters_entry_key" value="home.matches.Tennessee"/>
+          <parameter key="filters_entry_key" value="home.matches.Texas"/>
+          <parameter key="filters_entry_key" value="home.matches.Vanderbilt"/>
+        </list>
+        <parameter key="filters_logic_and" value="false"/>
+        <parameter key="filters_check_metadata" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:sort" compatibility="12.0.001" expanded="true" height="82" name="Sort by team name" width="90" x="849" y="85">
+        <list key="sort_by">
+          <parameter key="home" value="ascending"/>
+          <parameter key="season" value="ascending"/>
+          <parameter key="week" value="ascending"/>
+        </list>
+      </operator>
+      <operator activated="true" class="blending:generate_columns" compatibility="12.0.001" expanded="true" height="82" name="Generate New Attributes" width="90" x="983" y="85">
+        <list key="function_descriptions">
+          <parameter key="spread" value="score_home - score_away"/>
+          <parameter key="home_win" value="if (spread &gt; 0, &quot;Win&quot;, &quot;Loss&quot;)"/>
+          <parameter key="Home Third Down Completion Rate " value="if(third_down_att_home &gt; 0, third_down_comp_home/third_down_att_home, 0)"/>
+          <parameter key="Away Third Down Completion Rate" value="if(third_down_att_away &gt; 0, third_down_comp_away/third_down_att_away, 0)"/>
+          <parameter key="Home Fourth Down Completion Rate " value="if(fourth_down_att_home &gt; 0, fourth_down_comp_home/fourth_down_att_home, 0)"/>
+          <parameter key="Away Fourth Down Completion Rate" value="if(fourth_down_att_away &gt; 0, fourth_down_comp_away/fourth_down_att_away, 0)"/>
+          <parameter key="Home Pass Completion Rate" value="if(pass_att_home &gt; 0, pass_comp_home/pass_att_home, 0)"/>
+          <parameter key="Away Pass Completion Rate" value="if(pass_att_away &gt; 0, pass_comp_away/pass_att_away, 0)"/>
+          <parameter key="home_season" value="concat(home, &quot;_&quot;, season)"/>
+          <parameter key="Run-Pass Ratio" value="if(pass_att_home &gt; 0, rush_att_home/pass_att_home, 0)"/>
+          <parameter key="Rush Yards - Total Yards" value="if(total_yards_home &gt; 0, rush_yards_home/total_yards_home, 0)"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="America/Detroit"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="12.0.001" expanded="true" height="82" name="Remove Unnecessary Attributes" width="90" x="1117" y="85">
+        <parameter key="type" value="exclude attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="attendance␞away␞Away Fourth Down Completion Rate␞Away Pass Completion Rate␞Away Third Down Completion Rate␞conf_away␞conf_home␞date␞first_downs_away␞fourth_down_att_away␞fourth_down_att_home␞fourth_down_comp_away␞fourth_down_comp_home␞fum_away␞home␞Home Fourth Down Completion Rate ␞int_away␞ot_away␞ot_home␞pass_att_away␞pass_att_home␞pass_comp_away␞pass_comp_home␞pass_yards_away␞pen_num_away␞pen_yards_away␞possession_away␞q1_away␞q2_away␞q3_away␞q4_away␞rush_att_away␞rush_att_home␞rush_yards_away␞rush_yards_home␞score_away␞score_home␞season␞third_down_att_away␞third_down_att_home␞third_down_comp_away␞third_down_comp_home␞time_et␞total_yards_away␞total_yards_home␞tv␞pass_yards_home"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="concurrency:loop_values" compatibility="12.0.001" expanded="true" height="82" name="create rolling averages" width="90" x="1251" y="85">
+        <parameter key="attribute" value="home_season"/>
+        <parameter key="iteration_macro" value="loop_value"/>
+        <parameter key="reuse_results" value="false"/>
+        <parameter key="enable_parallel_execution" value="true"/>
+        <process expanded="true">
+          <operator activated="true" class="filter_examples" compatibility="12.0.001" expanded="true" height="103" name="Filter Examples" width="90" x="112" y="34">
+            <parameter key="parameter_expression" value=""/>
+            <parameter key="condition_class" value="custom_filters"/>
+            <parameter key="invert_filter" value="false"/>
+            <list key="filters_list">
+              <parameter key="filters_entry_key" value="home_season.equals.%{loop_value}"/>
+            </list>
+            <parameter key="filters_logic_and" value="false"/>
+            <parameter key="filters_check_metadata" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (spread)" width="90" x="45" y="238">
+            <parameter key="attribute_name" value="spread"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (fumbles)" width="90" x="179" y="238">
+            <parameter key="attribute_name" value="fum_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (q1 points)" width="90" x="313" y="238">
+            <parameter key="attribute_name" value="q1_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (q2 points)" width="90" x="447" y="238">
+            <parameter key="attribute_name" value="q2_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (q3_points)" width="90" x="581" y="238">
+            <parameter key="attribute_name" value="q3_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (q4 points)" width="90" x="715" y="238">
+            <parameter key="attribute_name" value="q4_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (first downs)" width="90" x="849" y="238">
+            <parameter key="attribute_name" value="first_downs_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (run-pass ratio)" width="90" x="983" y="238">
+            <parameter key="attribute_name" value="Run-Pass Ratio"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (rush yards - total yards)" width="90" x="1117" y="238">
+            <parameter key="attribute_name" value="Rush Yards - Total Yards"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (time of possesion)" width="90" x="1251" y="238">
+            <parameter key="attribute_name" value="possession_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (interceptions)" width="90" x="1385" y="238">
+            <parameter key="attribute_name" value="int_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (penalties)" width="90" x="1519" y="238">
+            <parameter key="attribute_name" value="pen_num_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (penalty yards)" width="90" x="1653" y="238">
+            <parameter key="attribute_name" value="pen_yards_home"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (third down completion rate)" width="90" x="1787" y="238">
+            <parameter key="attribute_name" value="Home Third Down Completion Rate "/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="series:moving_average" compatibility="7.4.000" expanded="true" height="82" name="Moving Average (pass completion rate)" width="90" x="1921" y="238">
+            <parameter key="attribute_name" value="Home Pass Completion Rate"/>
+            <parameter key="window_width" value="3"/>
+            <parameter key="aggregation_function" value="average"/>
+            <parameter key="ignore_missings" value="false"/>
+            <parameter key="result_position" value="end"/>
+            <parameter key="window_weighting" value="Rectangular"/>
+            <parameter key="keep_original_attribute" value="true"/>
+          </operator>
+          <operator activated="true" class="blending:generate_columns" compatibility="12.0.001" expanded="true" height="82" name="Generate Attributes" width="90" x="2055" y="34">
+            <list key="function_descriptions">
+              <parameter key="average_spread" value="if(missing([average(spread)]), spread, [average(spread)])"/>
+              <parameter key="average_fumbles" value="if(missing([average(fum_home)]), fum_home, [average(fum_home)])"/>
+              <parameter key="average_q1_points" value="if(missing([average(q1_home)]), q1_home, [average(q1_home)])"/>
+              <parameter key="average_q2_points" value="if(missing([average(q2_home)]), q2_home, [average(q2_home)])"/>
+              <parameter key="average_q3_points" value="if(missing([average(q3_home)]), q3_home, [average(q3_home)])"/>
+              <parameter key="average_q4_points" value="if(missing([average(q4_home)]), q4_home, [average(q4_home)])"/>
+              <parameter key="average_first_downs" value="if(missing([average(first_downs_home)]),first_downs_home, [average(first_downs_home)])"/>
+              <parameter key="average_run_pass_ratio" value="if(missing([average(Run-Pass Ratio)]),[Run-Pass Ratio], [average(Run-Pass Ratio)])"/>
+              <parameter key="average_rush_yard_to_total_yards" value="if(missing([average(Rush Yards - Total Yards)]),[Rush Yards - Total Yards], [average(Rush Yards - Total Yards)])"/>
+              <parameter key="average_time_of_possession" value="if(missing([average(possession_home)]),possession_home, [average(possession_home)])"/>
+              <parameter key="average_interceptions" value="if(missing([average(int_home)]),int_home, [average(int_home)])"/>
+              <parameter key="average_number_of_penalties" value="if(missing([average(pen_num_home)]),pen_num_home, [average(pen_num_home)])"/>
+              <parameter key="average_penalty_yards" value="if(missing([average(pen_yards_home)]),pen_yards_home, [average(pen_yards_home)])"/>
+              <parameter key="average_third_down_completion_rate" value="if(missing([average(Home Third Down Completion Rate )]),[Home Third Down Completion Rate ], [average(Home Third Down Completion Rate )])"/>
+              <parameter key="average_pass_completion_rate" value="if(missing([average(Home Pass Completion Rate)]),[Home Pass Completion Rate], [average(Home Pass Completion Rate)])"/>
+            </list>
+            <parameter key="keep_all_columns" value="true"/>
+            <parameter key="default_time_zone" value="America/Detroit"/>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="12.0.001" expanded="true" height="82" name="Remove added average columns" width="90" x="2189" y="34">
+            <parameter key="type" value="exclude attributes"/>
+            <parameter key="attribute_filter_type" value="a subset"/>
+            <parameter key="select_attribute" value=""/>
+            <parameter key="select_subset" value="average(first_downs_home)␞average(fum_home)␞average(int_home)␞average(pen_num_home)␞average(pen_yards_home)␞average(possession_home)␞average(q1_home)␞average(q2_home)␞average(q3_home)␞average(q4_home)␞average(Run-Pass Ratio)␞average(Rush Yards - Total Yards)␞average(spread)␞average(Home Pass Completion Rate)␞average(Home Third Down Completion Rate )"/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+          </operator>
+          <operator activated="true" class="blending:select_attributes" compatibility="12.0.001" expanded="true" height="82" name="Remove regular columnns (not averages)" width="90" x="2323" y="34">
+            <parameter key="type" value="exclude attributes"/>
+            <parameter key="attribute_filter_type" value="a subset"/>
+            <parameter key="select_attribute" value=""/>
+            <parameter key="select_subset" value="first_downs_home␞fum_home␞Home Pass Completion Rate␞Home Third Down Completion Rate ␞int_home␞pen_num_home␞pen_yards_home␞possession_home␞q1_home␞q2_home␞q3_home␞q4_home␞Run-Pass Ratio␞Rush Yards - Total Yards"/>
+            <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+          </operator>
+          <connect from_port="input 1" to_op="Filter Examples" to_port="example set input"/>
+          <connect from_op="Filter Examples" from_port="example set output" to_op="Moving Average (spread)" to_port="example set input"/>
+          <connect from_op="Moving Average (spread)" from_port="example set output" to_op="Moving Average (fumbles)" to_port="example set input"/>
+          <connect from_op="Moving Average (fumbles)" from_port="example set output" to_op="Moving Average (q1 points)" to_port="example set input"/>
+          <connect from_op="Moving Average (q1 points)" from_port="example set output" to_op="Moving Average (q2 points)" to_port="example set input"/>
+          <connect from_op="Moving Average (q2 points)" from_port="example set output" to_op="Moving Average (q3_points)" to_port="example set input"/>
+          <connect from_op="Moving Average (q3_points)" from_port="example set output" to_op="Moving Average (q4 points)" to_port="example set input"/>
+          <connect from_op="Moving Average (q4 points)" from_port="example set output" to_op="Moving Average (first downs)" to_port="example set input"/>
+          <connect from_op="Moving Average (first downs)" from_port="example set output" to_op="Moving Average (run-pass ratio)" to_port="example set input"/>
+          <connect from_op="Moving Average (run-pass ratio)" from_port="example set output" to_op="Moving Average (rush yards - total yards)" to_port="example set input"/>
+          <connect from_op="Moving Average (rush yards - total yards)" from_port="example set output" to_op="Moving Average (time of possesion)" to_port="example set input"/>
+          <connect from_op="Moving Average (time of possesion)" from_port="example set output" to_op="Moving Average (interceptions)" to_port="example set input"/>
+          <connect from_op="Moving Average (interceptions)" from_port="example set output" to_op="Moving Average (penalties)" to_port="example set input"/>
+          <connect from_op="Moving Average (penalties)" from_port="example set output" to_op="Moving Average (penalty yards)" to_port="example set input"/>
+          <connect from_op="Moving Average (penalty yards)" from_port="example set output" to_op="Moving Average (third down completion rate)" to_port="example set input"/>
+          <connect from_op="Moving Average (third down completion rate)" from_port="example set output" to_op="Moving Average (pass completion rate)" to_port="example set input"/>
+          <connect from_op="Moving Average (pass completion rate)" from_port="example set output" to_op="Generate Attributes" to_port="table input"/>
+          <connect from_op="Generate Attributes" from_port="table output" to_op="Remove added average columns" to_port="example set input"/>
+          <connect from_op="Remove added average columns" from_port="example set output" to_op="Remove regular columnns (not averages)" to_port="example set input"/>
+          <connect from_op="Remove regular columnns (not averages)" from_port="example set output" to_port="output 1"/>
+          <portSpacing port="source_input 1" spacing="0"/>
+          <portSpacing port="source_input 2" spacing="0"/>
+          <portSpacing port="sink_output 1" spacing="0"/>
+          <portSpacing port="sink_output 2" spacing="0"/>
+        </process>
+      </operator>
+      <operator activated="true" class="append" compatibility="12.0.001" expanded="true" height="82" name="put the data back together" width="90" x="1385" y="85">
+        <parameter key="data_management" value="auto"/>
+        <parameter key="merge_type" value="all"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="12.0.001" expanded="true" height="68" name="Store New Dataset" width="90" x="1519" y="34">
+        <parameter key="repository_entry" value="big10 and sec rolling averages"/>
+      </operator>
+      <connect from_op="CFB Box Scores 2002-2024" from_port="output" to_op="Make Season Qualitative" to_port="example set input"/>
+      <connect from_op="Make Season Qualitative" from_port="example set output" to_op="Replace Unranked Teams" to_port="example set input"/>
+      <connect from_op="Replace Unranked Teams" from_port="example set output" to_op="Replace Postseason Week" to_port="example set input"/>
+      <connect from_op="Replace Postseason Week" from_port="example set output" to_op="Remove 2002-2013" to_port="example set input"/>
+      <connect from_op="Remove 2002-2013" from_port="example set output" to_op="Big10/SEC Teams" to_port="example set input"/>
+      <connect from_op="Big10/SEC Teams" from_port="example set output" to_op="Sort by team name" to_port="example set input"/>
+      <connect from_op="Sort by team name" from_port="example set output" to_op="Generate New Attributes" to_port="table input"/>
+      <connect from_op="Generate New Attributes" from_port="table output" to_op="Remove Unnecessary Attributes" to_port="example set input"/>
+      <connect from_op="Remove Unnecessary Attributes" from_port="example set output" to_op="create rolling averages" to_port="input 1"/>
+      <connect from_op="create rolling averages" from_port="output 1" to_op="put the data back together" to_port="example set 1"/>
+      <connect from_op="put the data back together" from_port="merged set" to_op="Store New Dataset" to_port="input"/>
+      <connect from_op="Store New Dataset" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>

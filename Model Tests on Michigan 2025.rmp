@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="12.0.001">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="12.0.001" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="Spread (DT) Model" width="90" x="179" y="136">
+        <parameter key="repository_entry" value="spread_dt_model.rmp"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="Spread (LR) Model" width="90" x="179" y="340">
+        <parameter key="repository_entry" value="spread_lr_model.rmp"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="Win/Loss Model" width="90" x="179" y="544">
+        <parameter key="repository_entry" value="winloss_dt_model.rmp"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="michigan rolling averages" width="90" x="179" y="238">
+        <parameter key="repository_entry" value="michigan 2025 rolling averages"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="12.0.001" expanded="true" height="82" name="Target (spread dt)" width="90" x="313" y="238">
+        <list key="set_roles">
+          <parameter key="spread" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="michigan rolling averages (2)" width="90" x="179" y="442">
+        <parameter key="repository_entry" value="michigan 2025 rolling averages"/>
+      </operator>
+      <operator activated="true" class="retrieve" compatibility="12.0.001" expanded="true" height="68" name="michigan rolling averages (3)" width="90" x="179" y="646">
+        <parameter key="repository_entry" value="michigan 2025 rolling averages"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.001" expanded="true" height="82" name="Apply Model (dt-spread)" width="90" x="514" y="187">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="12.0.001" expanded="true" height="82" name="Target (spread lr)" width="90" x="313" y="442">
+        <list key="set_roles">
+          <parameter key="spread" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.001" expanded="true" height="82" name="Apply Model (lr-spread)" width="90" x="514" y="340">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance" compatibility="12.0.001" expanded="true" height="82" name="Performance (lr-spread)" width="90" x="648" y="340">
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="12.0.001" expanded="true" height="82" name="Target spread" width="90" x="313" y="646">
+        <list key="set_roles">
+          <parameter key="home_win" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.001" expanded="true" height="82" name="Apply Model (dt-home-win)" width="90" x="514" y="544">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance" compatibility="12.0.001" expanded="true" height="82" name="Performance (dt-home-win)" width="90" x="715" y="544">
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <operator activated="true" class="performance" compatibility="12.0.001" expanded="true" height="82" name="Performance (dt-spread)" width="90" x="648" y="187">
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <connect from_op="Spread (DT) Model" from_port="output" to_op="Apply Model (dt-spread)" to_port="model"/>
+      <connect from_op="Spread (LR) Model" from_port="output" to_op="Apply Model (lr-spread)" to_port="model"/>
+      <connect from_op="Win/Loss Model" from_port="output" to_op="Apply Model (dt-home-win)" to_port="model"/>
+      <connect from_op="michigan rolling averages" from_port="output" to_op="Target (spread dt)" to_port="example set input"/>
+      <connect from_op="Target (spread dt)" from_port="example set output" to_op="Apply Model (dt-spread)" to_port="unlabelled data"/>
+      <connect from_op="michigan rolling averages (2)" from_port="output" to_op="Target (spread lr)" to_port="example set input"/>
+      <connect from_op="michigan rolling averages (3)" from_port="output" to_op="Target spread" to_port="example set input"/>
+      <connect from_op="Apply Model (dt-spread)" from_port="labelled data" to_op="Performance (dt-spread)" to_port="labelled data"/>
+      <connect from_op="Apply Model (dt-spread)" from_port="model" to_port="result 4"/>
+      <connect from_op="Target (spread lr)" from_port="example set output" to_op="Apply Model (lr-spread)" to_port="unlabelled data"/>
+      <connect from_op="Apply Model (lr-spread)" from_port="labelled data" to_op="Performance (lr-spread)" to_port="labelled data"/>
+      <connect from_op="Performance (lr-spread)" from_port="performance" to_port="result 3"/>
+      <connect from_op="Target spread" from_port="example set output" to_op="Apply Model (dt-home-win)" to_port="unlabelled data"/>
+      <connect from_op="Apply Model (dt-home-win)" from_port="labelled data" to_op="Performance (dt-home-win)" to_port="labelled data"/>
+      <connect from_op="Apply Model (dt-home-win)" from_port="model" to_port="result 5"/>
+      <connect from_op="Performance (dt-home-win)" from_port="performance" to_port="result 2"/>
+      <connect from_op="Performance (dt-spread)" from_port="performance" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+    </process>
+  </operator>
+</process>
