@@ -1,7 +1,7 @@
 # Modeling FBS Team Performance to Forecast Wins in Sports Analytics
 
 A small class project/stepping stone to future research in sports anayltics and the effects of rolling averages on the prediction of Win/Loss and Point Spread. 
-A initial assignment report [Final_Report.pdf]() shows the results of the first iteration of this ongoing project, and provides a more in-depth explanation of the overview + results of the project.
+A initial assignment report [Final_Report.pdf](Final_Report.pdf) shows the results of the first iteration of this ongoing project, and provides a more in-depth explanation of the overview + results of the project.
 Below is an introduction of the files and what they do as far as my workflow (as well as images of the workflow and how they should render in RapidMiner) as well as the csv files used in this initial iteration.
 All data preprocessing, mining, and results were conducted in Altair RapidMiner (AI Studio 2026.0.1), and recreation of these results are easily reproducible if the files are run in the software. 
 
