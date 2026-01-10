@@ -12,7 +12,7 @@ The original data set used/manipulated in the work can be found at this [link](h
 Each sample/row in the dataset pertains to a specific game in a specific season (year) between two teams, and includes attributes such as `score_home`, `score_away`, `season`, `week`, etc. The relevant data sets used are below, but all of the derived data came from this dataset.  
 
 ### Feature Reduced Set + Training Set with Rolling Averages
-[Feature_Reduced_Set.csv]() + [Training_Set_Rolling_Averages.csv]() 
+[Feature_Reduced_Set.csv](Feature_Reduced_Set.csv) + [Training_Set_Rolling_Averages.csv](Training_Set_Rolling_Averages.csv) 
 
 The original data set did not include rolling averages, as well as necessary variables I wanted to use for rolling averages such as `spread` (home team score - away team score), and many rates that were 
 necessary for what I wanted to assess such as pass completion rates, third down completion rates, etc. The preprocessed flow starts with an encoding of a numerical value
@@ -36,17 +36,17 @@ per team/season for the weeks in their season. A table below shows plaintext/act
 | `Home Pass Completion Rate`       | if(pass_att_home > 0, pass_comp_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Attempts / Completions, else 0
 | `Run-Pass Ratio`                  | if(pass_att_home > 0, rush_att_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Rush Attempts / Pass Completions, else 0
 
-The [Pre_Rolling_Averages_Big10_+_SEC.rmp]() and [Rolling Averages Big10 + SEC.rmp]() RapidMiner files provide a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the separate flows are both apart of the work that happens in the main flow ([Data_Preprocessing_+_Mining_+_Store_Models.rmp]()).
+The [Pre_Rolling_Averages_Big10_+_SEC.rmp](Pre_Rolling_Averages_Big10_+_SEC.rmp) and [Rolling_Averages_Big10_+_SEC.rmp](Rolling_Averages_Big10_+_SEC.rmp) RapidMiner files provide a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the separate flows are both apart of the work that happens in the main flow ([Data_Preprocessing_+_Mining_+_Store_Models.rmp](Data_Preprocessing_+_Mining_+_Store_Models.rmp)).
 
 ### Michigan 2025 Compiled Box Score Data + Test Set
-[Michigan_2025_Box_Scores.csv](Michigan_2025_Box_Scores.csv) + [Michigan_2025_Rolling_Averages.csv]()
+[Michigan_2025_Box_Scores.csv](Michigan_2025_Box_Scores.csv) + [Michigan_2025_Rolling_Averages.csv](Michigan_2025_Rolling_Averages.csv)
 
 Cross Validation with 10 folds was used in all of the models tested, but in an effort to have to look at truly unseen data, the 2025 home season box scores from the Michigan Football Team were compiled in order to get the same generated variables as well as the rolling averages as further testing for the models. In the future, I hope to compile the data of all of the Big10/SEC teams from 2025 to get a further comprehensive test, but the compilation of Michigan's data sufficed for this assignment. 
 
-The [Rolling_Averages_of_Michigan_2025_Home_Season.rmp]() RapidMiner file provides a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the data manipulated here is apart of the work that happens in the model testing flow on the Michigan data ([Model_Tests_on_Michigan_2025.rmp]()).
+The [Rolling_Averages_of_Michigan_2025_Home_Season.rmp](Rolling_Averages_of_Michigan_2025_Home_Season.rmp) RapidMiner file provides a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the data manipulated here is apart of the work that happens in the model testing flow on the Michigan data ([Model_Tests_on_Michigan_2025.rmp](Model_Tests_on_Michigan_2025.rmp)).
 
 ### Main Flow + Michigan 2025 Data Testing + Models
-[Data_Preprocessing_+_Mining_+_Store_Models.rmp]() + [Model_Tests_on_Michigan_2025.rmp]()
+[Data_Preprocessing_+_Mining_+_Store_Models.rmp](Data_Preprocessing_+_Mining_+_Store_Models.rmp) + [Model_Tests_on_Michigan_2025.rmp](Model_Tests_on_Michigan_2025.rmp)
 
 These files include the entire flow of the preprocessing, mining, and results of the 10-fold cross validation, and the model testing on the 2025 Michigan Season (home games).
 
