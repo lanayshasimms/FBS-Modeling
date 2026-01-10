@@ -39,7 +39,7 @@ per team/season for the weeks in their season. A table below shows plaintext/act
 The [Pre_Rolling_Averages_Big10_+_SEC.rmp]() and [Rolling Averages Big10 + SEC.rmp]() RapidMiner files provide a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the separate flows are both apart of the work that happens in the main flow ([Data_Preprocessing_+_Mining_+_Store_Models.rmp]()).
 
 ### Michigan 2025 Compiled Box Score Data + Test Set
-[Michigan_2025_Box_Scores.csv]() + [Michigan_2025_Rolling_Averages.csv]()
+[Michigan_2025_Box_Scores.csv](Michigan_2025_Box_Scores.csv) + [Michigan_2025_Rolling_Averages.csv]()
 
 Cross Validation with 10 folds was used in all of the models tested, but in an effort to have to look at truly unseen data, the 2025 home season box scores from the Michigan Football Team were compiled in order to get the same generated variables as well as the rolling averages as further testing for the models. In the future, I hope to compile the data of all of the Big10/SEC teams from 2025 to get a further comprehensive test, but the compilation of Michigan's data sufficed for this assignment. 
 
