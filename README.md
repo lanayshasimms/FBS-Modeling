@@ -12,11 +12,11 @@ The original data set used/manipulated in the work can be found at this [link](h
 Each sample/row in the dataset pertains to a specific game in a specific season (year) between two teams, and includes attributes such as `score_home`, `score_away`, `season`, `week`, etc. 
 
 ### Feature Reduced Set + Training Set with Rolling Averages
-
-[Big10/SEC Scores](big10_sec_rolling_averages.csv)
+Big10/SEC Feature Reduced Set + 
+[big10_sec_rolling_averages.csv]() 
 
 The original data set did not include rolling averages, as well as necessary variables I wanted to use for rolling averages such as `spread` (home team score - away team score), and many rates that were 
-necessary for what I wanted to assess such as pass completion rates, third down completion rates, etc. ------- and starts with an encoding of a numerical value
+necessary for what I wanted to assess such as pass completion rates, third down completion rates, etc. The preprocessed flow starts with an encoding of a numerical value
 to nominal (season) to ensure the semantics of the values are used rather than the numerical values. The
 data allowed for empty values in the event that a team was unranked, and rankings are only awarded 1
 through 25, so to treat all unranked teams as equal, a ’26’ ranking was given as a placeholder. The pipeline
@@ -36,3 +36,5 @@ per team/season for the weeks in their season. A table below shows plaintext/act
 | Home Fourth Down Completion Rate| if(fourth_down_att_home > 0, fourth_down_comp_home/fourth_down_att_home, 0) | If the Fourth Down Attempts were not 0, compute Attempts / Completions, else 0
 | Home Pass Completion Rate       | if(pass_att_home > 0, pass_comp_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Attempts / Completions, else 0
 | Run-Pass Ratio                  | if(pass_att_home > 0, rush_att_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Rush Attempts / Pass Completions, else 0
+
+The [Rolling Averages Big10 + SEC.rmp]() and
