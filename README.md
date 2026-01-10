@@ -1,7 +1,7 @@
 # Modeling FBS Team Performance to Forecast Wins in Sports Analytics
 
 A small class project/stepping stone to future research in sports anayltics and the effects of rolling averages on the prediction of Win/Loss and Point Spread. 
-A initial assignment report [INSERT NAME HERE] shows the results of the first iteration of this ongoing project, and provides a more in-depth explanation of the overview of the project.
+A initial assignment report [INSERT NAME HERE] shows the results of the first iteration of this ongoing project, and provides a more in-depth explanation of the overview + results of the project.
 Below is an introduction of the files and what they do as far as my workflow (as well as images of the workflow and how they should render in RapidMiner) as well as the csv files used in this initial iteration.
 All data preprocessing, mining, and results were conducted in Altair RapidMiner (AI Studio 2026.0.1), and recreation of these results are easily reproducible if the files are run in the software. 
 
@@ -9,11 +9,11 @@ All data preprocessing, mining, and results were conducted in Altair RapidMiner 
 
 ### College Football Team Stats 2002 - January 2024
 The original data set used/manipulated in the work can be found at this [link](https://www.kaggle.com/datasets/cviaxmiwnptr/college-football-team-stats-2002-to-january-2024/data) and the data includes 58 attributes and 18,909 samples.
-Each sample/row in the dataset pertains to a specific game in a specific season (year) between two teams, and includes attributes such as `score_home`, `score_away`, `season`, `week`, etc. 
+Each sample/row in the dataset pertains to a specific game in a specific season (year) between two teams, and includes attributes such as `score_home`, `score_away`, `season`, `week`, etc. The relevant data sets used are below, but all of the derived data came from this dataset.  
 
 ### Feature Reduced Set + Training Set with Rolling Averages
 Big10/SEC Feature Reduced Set + 
-[big10_sec_rolling_averages.csv]() 
+[Training_Set_Rolling_Averages.csv]() 
 
 The original data set did not include rolling averages, as well as necessary variables I wanted to use for rolling averages such as `spread` (home team score - away team score), and many rates that were 
 necessary for what I wanted to assess such as pass completion rates, third down completion rates, etc. The preprocessed flow starts with an encoding of a numerical value
@@ -30,11 +30,11 @@ per team/season for the weeks in their season. A table below shows plaintext/act
 
 | Attribute Name                  | Calculation                        | Description                                     |
 |---------------------------------|------------------------------------|-------------------------------------------------|
-| spread                          | score_home - score_away            | Home Team Score - Away Team Score
-| home_win                        | if (spread > 0, "Win", "Loss")     | If the spread is positive, it's a Win, else Loss
-| Home Third Down Completion Rate | if (third_down_att_home > 0, third_down_comp_home/third_down_att_home, 0) | If the Third Down Attempts were not 0, compute Attempts / Completions, else 0
-| Home Fourth Down Completion Rate| if(fourth_down_att_home > 0, fourth_down_comp_home/fourth_down_att_home, 0) | If the Fourth Down Attempts were not 0, compute Attempts / Completions, else 0
-| Home Pass Completion Rate       | if(pass_att_home > 0, pass_comp_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Attempts / Completions, else 0
-| Run-Pass Ratio                  | if(pass_att_home > 0, rush_att_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Rush Attempts / Pass Completions, else 0
+| `spread`                          | score_home - score_away            | Home Team Score - Away Team Score
+| `home_win`                        | if (spread > 0, "Win", "Loss")     | If the spread is positive, it's a Win, else Loss
+| `Home Third Down Completion Rate` | if (third_down_att_home > 0, third_down_comp_home/third_down_att_home, 0) | If the Third Down Attempts were not 0, compute Attempts / Completions, else 0
+| `Home Fourth Down Completion Rate`| if(fourth_down_att_home > 0, fourth_down_comp_home/fourth_down_att_home, 0) | If the Fourth Down Attempts were not 0, compute Attempts / Completions, else 0
+| `Home Pass Completion Rate`       | if(pass_att_home > 0, pass_comp_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Attempts / Completions, else 0
+| `Run-Pass Ratio`                  | if(pass_att_home > 0, rush_att_home/pass_att_home, 0) | If the Pass Attempts were not 0, compute Rush Attempts / Pass Completions, else 0
 
-The [Rolling Averages Big10 + SEC.rmp]() and
+The  and [Rolling Averages Big10 + SEC.rmp]()
