@@ -46,7 +46,13 @@ Cross Validation with 10 folds was used in all of the models tested, but in an e
 The [Rolling_Averages_of_Michigan_2025_Home_Season.rmp](Rolling_Averages_of_Michigan_2025_Home_Season.rmp) RapidMiner file provides a further breakdown of the flow as to how the data set was manipulated and how rolling averages were calculated; the data manipulated here is apart of the work that happens in the model testing flow on the Michigan data ([Model_Tests_on_Michigan_2025.rmp](Model_Tests_on_Michigan_2025.rmp)).
 
 ### Main Flow + Michigan 2025 Data Testing + Models
-[Data_Preprocessing_+_Mining_+_Store_Models.rmp](Data_Preprocessing_+_Mining_+_Store_Models.rmp) + [Model_Tests_on_Michigan_2025.rmp](Model_Tests_on_Michigan_2025.rmp)
+[Data_Preprocessing_+_Mining_+_Store_Models.rmp](Data_Preprocessing_+_Mining_+_Store_Models.rmp) 
+
+![Main Flow](main_flow.png)
+
+[Model_Tests_on_Michigan_2025.rmp](Model_Tests_on_Michigan_2025.rmp)
+
+![Test Flow](test_flow.png)
 
 These files include the entire flow of the preprocessing, mining, and results of the 10-fold cross validation, and the model testing on the 2025 Michigan Season (home games).
 
