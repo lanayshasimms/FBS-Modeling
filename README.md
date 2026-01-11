@@ -56,7 +56,7 @@ The [Rolling_Averages_of_Michigan_2025_Home_Season.rmp](Rolling_Averages_of_Mich
 
 These files include the entire flow of the preprocessing, mining, and results of the 10-fold cross validation, and the model testing on the 2025 Michigan Season (home games).
 
-[Spread - Decision Tree Model](spread_dt_model.rmp.rmmodel) + [Spread - Linear Regression Model](spread_lr_model.rmp.rmmodel) + [Win/Loss - Decision Tree Model](winloss_dt_model.rmp.rmmodel)
+[Spread - Decision Tree Model](models/spread_dt_model.rmp.rmmodel) + [Spread - Linear Regression Model](models/spread_lr_model.rmp.rmmodel) + [Win/Loss - Decision Tree Model](models/winloss_dt_model.rmp.rmmodel)
 
 These files include all three of the models that were stored from the initial preprocessing and mining and used in the testing on the 2025 Michigan Season. 
 
